@@ -7,31 +7,12 @@ import threading
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 from tf.transformations import euler_from_quaternion
-#Position Tracking
-xPosCur = 0.0
-yPosCur = 0.0
-angCur = 0.0
-#Velocities
-dirVel = 0.2
-dirVelMax = 0.33
-angVel = 0.52
-angVelMax = 0.52
-timeRate = 60
-twist = Twist()
-#Checks to see if a string is a number
-
-
 
 
 pub = rospy.Publisher('/mobile_base/commands/velocity',Twist, queue_size=1)
 rospy.Subscriber('odom',Odometry,odometryCb)
 rospy.init_node('run_py',anonymous=True)
 rate = rospy.Rate(timeRate)
-#printInfo()
-#Main loopty loop
-#while not rospy.is_shutdown():
-#        s = raw_input('turtle :')
-#        params = s.split(' ')
         
 speed = 0.15
 ap = "5"
@@ -65,6 +46,4 @@ while True:
 	getCommand()
 	counter = 0
     print(twist.linear.x)
-    #ap = r.content
     pub.publish(twist)
-    #getCommand()
